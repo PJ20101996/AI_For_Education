@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summary View | AI Summarizer</title>
+  <link rel="stylesheet" href="summary_view.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-logo">🧠 AI Summarizer</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">⬅ Back</a></li>
+      <li><a href="#">My Files</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="summary-container">
+    <div class="left-panel">
+      <h2>🧠 Summary</h2>
+      <div id="summary-content"></div>
+    </div>
+
+    <div class="right-panel">
+      <h2>📄 Document Viewer</h2>
+      <iframe id="doc-viewer" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script src="summary_view.js"></script>
+</body>
+</html>

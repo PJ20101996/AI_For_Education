@@ -1,0 +1,116 @@
+/* 🌟 LOGIN PAGE STYLES */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* 🌟 Container */
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 🌟 Card */
+.auth-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.8s ease;
+}
+
+/* 🌟 Logo Section */
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* 🌟 Forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+.auth-form button {
+  background: linear-gradient(135deg, #f5d742, #ffcc00);
+  color: #000;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.auth-form button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ffcc00, #f5d742);
+}
+
+/* 🌟 Switch Text */
+.switch-text {
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.switch-text span {
+  color: #f5d742;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.switch-text span:hover {
+  text-decoration: underline;
+}
+
+/* 🌟 Hidden Form */
+.hidden {
+  display: none;
+}
+
+/* 🌟 Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🌟 Message */
+#message {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #f5d742;
+  font-weight: 500;
+}
