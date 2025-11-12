@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import PyPDF2, docx, numpy as np, tiktoken, os
 
-# ✅ Load environment variables
+# Load environment variables
 load_dotenv()
 
 app = FastAPI()
