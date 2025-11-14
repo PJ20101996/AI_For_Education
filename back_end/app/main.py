@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 import os
 
-from app.services.user_services import router as user_router
+from services.user_services import router as user_router
 
 # Load environment variables
 load_dotenv()

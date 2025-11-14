@@ -4,9 +4,9 @@ FastAPI endpoints for user authentication and file upload/summarization
 from fastapi import APIRouter, HTTPException, UploadFile, Form, File
 import os
 
-from app.schemas.user_schema import User
-from app.database import users_collection, embeddings_collection
-from app.utils.helper import (
+from schemas.user_schema import User
+from database import users_collection, embeddings_collection
+from utils.helper import (
     extract_text,
     count_tokens,
     create_embedding,
