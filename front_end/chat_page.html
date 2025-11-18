@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat with PDF | AI Summarizer</title>
+  <link rel="stylesheet" href="chat.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <h2>📄 Chat with Your Document</h2>
+    <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  </nav>
+
+  <div class="chat-container">
+    <div id="chat-box"></div>
+
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask something about your document..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>

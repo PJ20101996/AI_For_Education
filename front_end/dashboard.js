@@ -61,7 +61,7 @@ async function uploadFile() {
   uploadMessage.textContent = "⏳ Uploading and summarizing your document...";
 
   try {
-    const res = await fetch(`${BACKEND_URL}/upload`, {
+    const res = await fetch(`${BACKEND_URL}/file/upload`, {
       method: "POST",
       body: formData,
     });

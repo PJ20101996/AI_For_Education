@@ -26,3 +26,6 @@ window.onload = () => {
     docViewer.outerHTML = `<p style="color:#fff;">❌ Preview not supported for this file type.</p>`;
   }
 };
+function goToChat() {
+  window.location.href = "chat_page.html";
+}

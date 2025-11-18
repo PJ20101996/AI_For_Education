@@ -12,7 +12,7 @@ async function login() {
   }
 
   try {
-    const response = await fetch(`${BACKEND_URL}/login`, {
+    const response = await fetch(`${BACKEND_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -53,7 +53,7 @@ async function signup() {
   }
 
   try {
-    const response = await fetch(`${BACKEND_URL}/signup`, {
+    const response = await fetch(`${BACKEND_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
