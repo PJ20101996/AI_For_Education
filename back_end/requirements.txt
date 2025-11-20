@@ -9,7 +9,7 @@ pymongo==4.6.1
 # AI and ML
 openai==1.12.0
 numpy==1.26.3
-tiktoken==0.5.2
+tiktoken==0.7.0
 
 # Document processing
 PyPDF2==3.0.1
