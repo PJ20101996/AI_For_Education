@@ -5,11 +5,25 @@ import os
 
 load_dotenv()
 
-# MongoDB Connection
-client = MongoClient("mongodb://localhost:27017/")
-db = client["AI_project"]
-users_collection = db["users"]
-embeddings_collection = db["doc_embeddings"]
+# Read environment variable from Render dashboard
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "AI_project")
+
+if not MONGO_URI:
+    raise Exception("❌ MONGO_URI environment variable not set!")
+
+try:
+    client = MongoClient(MONGO_URI)
+    # Test connection
+    client.admin.command('ping')
+    print("✅ Connected to MongoDB Atlas successfully")
+    
+    db = client[MONGO_DB_NAME]
+    users_collection = db["users"]
+    embeddings_collection = db["doc_embeddings"]
+except Exception as e:
+    print(f"❌ Error connecting to MongoDB: {e}")
+    raise
 
 # Uploads Directory
 UPLOAD_DIR = "uploads"
