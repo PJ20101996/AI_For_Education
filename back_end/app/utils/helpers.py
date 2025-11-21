@@ -4,6 +4,7 @@ from pdf2image import convert_from_path
 import pytesseract
 from PIL import Image
 import os
+import platform
 
 # Extract Text from File
 def extract_text(file_path: str, file_type: str):
@@ -95,22 +96,37 @@ Document:
 
 
 
-POPPLER_PATH = r"C:\poppler-25.07.0\Library\bin"
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+# Configure paths based on OS
+# On Windows, use specific paths; on Linux, rely on system PATH
+if platform.system() == "Windows":
+    POPPLER_PATH = r"C:\poppler-25.07.0\Library\bin"
+    TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+else:
+    # On Linux (Render), Poppler and Tesseract should be in system PATH
+    POPPLER_PATH = None  # Will use system PATH
+    # Tesseract should be available in PATH on Linux
 
 def extract_text_with_ocr(file_path):
     text = ""
 
-    # OCR for PDFs
-    if file_path.lower().endswith(".pdf"):
-        pages = convert_from_path(file_path, poppler_path=POPPLER_PATH)
-        for page in pages:
-            text += pytesseract.image_to_string(page)
+    try:
+        # OCR for PDFs
+        if file_path.lower().endswith(".pdf"):
+            if POPPLER_PATH:
+                pages = convert_from_path(file_path, poppler_path=POPPLER_PATH)
+            else:
+                # On Linux, Poppler should be in system PATH
+                pages = convert_from_path(file_path)
+            for page in pages:
+                text += pytesseract.image_to_string(page)
 
-    # OCR for Images (jpg, jpeg, png)
-    elif file_path.lower().endswith((".png", ".jpg", ".jpeg")):
-        image = Image.open(file_path)
-        text += pytesseract.image_to_string(image)
+        # OCR for Images (jpg, jpeg, png)
+        elif file_path.lower().endswith((".png", ".jpg", ".jpeg")):
+            image = Image.open(file_path)
+            text += pytesseract.image_to_string(image)
+    except Exception as e:
+        print(f"OCR error: {e}")
+        return ""
 
     return text.strip() if text else ""
