@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://127.0.0.1:8000";  // update if using different port
+const BACKEND_URL = "https://ai-for-education-2.onrender.com";  // update if using different port
 
 // 🌟 LOGIN FUNCTION
 async function login() {

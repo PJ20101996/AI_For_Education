@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = "https://ai-for-education-2.onrender.com";
 const email = localStorage.getItem("userEmail");
 const filename = localStorage.getItem("filename");
 

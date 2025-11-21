@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = "https://ai-for-education-2.onrender.com";
 const userEmail = localStorage.getItem("userEmail");
 const userName = localStorage.getItem("userName");
 
@@ -21,6 +21,7 @@ fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
     fileNameEl.textContent = `Selected file: ${file.name}`;
     previewIcon.style.display = "inline";
+    previewSelectedFile();
   } else {
     fileNameEl.textContent = "No file selected";
     previewIcon.style.display = "none";
@@ -37,11 +38,26 @@ function previewSelectedFile() {
   const fileURL = URL.createObjectURL(file);
 
   if (fileType === "pdf") {
-    previewBox.innerHTML = `<embed src="${fileURL}" type="application/pdf">`;
+    previewBox.innerHTML = `<embed src="${fileURL}" type="application/pdf" width="100%" height="100%">`;
+
+  } else if (["png", "jpg", "jpeg"].includes(fileType)) {
+    previewBox.innerHTML = `
+      <img src="${fileURL}" 
+           alt="Image Preview" 
+           style="max-width:100%; height:auto; display:block; margin:auto; border-radius:10px;" />
+    `;
+
   } else if (["txt", "csv"].includes(fileType)) {
-    previewBox.innerHTML = `<iframe src="${fileURL}"></iframe>`;
+    previewBox.innerHTML = `<iframe src="${fileURL}" width="100%" height="100%"></iframe>`;
+
+  } else if (["doc", "docx"].includes(fileType)) {
+    previewBox.innerHTML = `
+      <p style="color:#fff;">📄 Word file selected</p>
+      <p style="color:#aaa;">Preview not supported here. Upload to get summary.</p>
+    `;
+
   } else {
-    previewBox.innerHTML = `<p style="color:#fff;">⚠️ Preview not supported for ${fileType}. You can upload and view it later.</p>`;
+    previewBox.innerHTML = `<p style="color:#fff;">❌ Preview not supported for ${fileType}</p>`;
   }
 }
 
@@ -67,30 +83,25 @@ async function uploadFile() {
     });
 
     const data = await res.json();
-    console.log("Upload Response:", data); // for debugging
+    console.log("Upload Response:", data);
 
-    // Show backend response message
     uploadMessage.textContent = data.message || "✅ Upload successful.";
 
-    // ✅ Check for summary and fileurl
     if (data.summary && (data.fileurl || data.file_url)) {
       const fileUrl = data.fileurl || data.file_url;
 
-      // ✅ Store all required info for the summary page
       localStorage.setItem("summary", data.summary);
       localStorage.setItem("fileurl", fileUrl);
       localStorage.setItem("filename", fileInput.files[0].name);
       localStorage.setItem("tokens", data.tokens || "N/A");
       localStorage.setItem("mode", data.message.includes("RAG") ? "RAG" : "Normal");
 
-      // ✅ Redirect to the summary view page
       setTimeout(() => {
         window.location.href = "summary_view.html";
       }, 1000);
     } else {
       uploadMessage.textContent = "❌ Failed to get summary or file URL from backend.";
     }
-
   } catch (error) {
     console.error("Upload error:", error);
     uploadMessage.textContent = "❌ Upload failed. Please check your server.";
